@@ -222,11 +222,24 @@ Here are some standard links for getting your machine calibrated:
   //#define  DEFAULT_Kp 63.0
   //#define  DEFAULT_Ki 2.25
   //#define  DEFAULT_Kd 440
+  
+  // PID Tuned E3D V6 (Std, official)
+  //#define  DEFAULT_Kp 43.87
+  //#define  DEFAULT_Ki 4.8
+  //#define  DEFAULT_Kd 100.26
 
-  // PID tuned E3D V6
-  #define  DEFAULT_Kp 43.87
-  #define  DEFAULT_Ki 4.8
-  #define  DEFAULT_Kd 100.26
+  // PID tuned E3D V6 Volcano (knockoff)
+  //#define  DEFAULT_Kp 18.74
+  //#define  DEFAULT_Ki 0.71
+  //#define  DEFAULT_Kd 122.98
+  
+  //#define  DEFAULT_Kp 25.84
+  //#define  DEFAULT_Ki 1.21
+  //#define  DEFAULT_Kd 137.82
+  
+  #define  DEFAULT_Kp 17.83
+  #define  DEFAULT_Ki 1.01
+  #define  DEFAULT_Kd 78.42
 
 #endif // PIDTEMP
 
@@ -259,9 +272,9 @@ Here are some standard links for getting your machine calibrated:
   #define PID_BED_INTEGRAL_DRIVE_MAX MAX_BED_POWER //limit for the integral term
 
   // PID Tuned 12v PCB Heater w/ Aluminum and Borosilicate
-  #define  DEFAULT_bedKp 159.21
-  #define  DEFAULT_bedKi 7.53
-  #define  DEFAULT_bedKd 841.23
+  #define  DEFAULT_bedKp 137.36
+  #define  DEFAULT_bedKi 5.90
+  #define  DEFAULT_bedKd 800.04
 
   //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -478,7 +491,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 
     // Set the number of grid points per dimension.
     // You probably don't need more than 3 (squared=9).
-    #define AUTO_BED_LEVELING_GRID_POINTS 3
+    #define AUTO_BED_LEVELING_GRID_POINTS 4
 
   #else  // !AUTO_BED_LEVELING_GRID
 
@@ -495,9 +508,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 
   // Offsets to the Z probe relative to the nozzle tip.
   // X and Y offsets must be integers.
-  #define X_PROBE_OFFSET_FROM_EXTRUDER 0      // Z probe to nozzle X offset: -left  +right
-  #define Y_PROBE_OFFSET_FROM_EXTRUDER 50     // Z probe to nozzle Y offset: -front +behind
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -0.66  // Z probe to nozzle Z offset: -below (always!)
+  #define X_PROBE_OFFSET_FROM_EXTRUDER 25      // Z probe to nozzle X offset: -left  +right
+  #define Y_PROBE_OFFSET_FROM_EXTRUDER 0     // Z probe to nozzle Y offset: -front +behind
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -1.21  // Z probe to nozzle Z offset: -below (always!)
 
   #define Z_RAISE_BEFORE_HOMING 0       // (in mm) Raise Z axis before homing (G28) for Z probe clearance.
                                         // Be sure you have this distance over your Z_MAX_POS in case.
@@ -529,8 +542,8 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
 
     //#define Z_SAFE_HOMING_X_POINT ((X_MIN_POS + X_MAX_POS) / 2)    // X point for Z homing when homing all axis (G28).
     //#define Z_SAFE_HOMING_Y_POINT ((Y_MIN_POS + Y_MAX_POS) / 2)    // Y point for Z homing when homing all axis (G28).
-    #define Z_SAFE_HOMING_X_POINT 95      // X point for Z homing when homing all axis (G28).
-    #define Z_SAFE_HOMING_Y_POINT 230     // Y point for Z homing when homing all axis (G28).
+    #define Z_SAFE_HOMING_X_POINT 205      // X point for Z homing when homing all axis (G28).
+    #define Z_SAFE_HOMING_Y_POINT 267     // Y point for Z homing when homing all axis (G28).
 
   #endif
 
@@ -589,22 +602,22 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
  * MOVEMENT SETTINGS
  */
 
-#define HOMING_FEEDRATE {50*60, 50*60, 20*60, 0}  // set the homing speeds (mm/min)
+#define HOMING_FEEDRATE {50*60, 50*60, 10*60, 0}  // set the homing speeds (mm/min)
 
 // default settings
 
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {(200 * 16) / (2 * 20), (200 * 16) / (2 * 20), 80, 295}
-#define DEFAULT_MAX_FEEDRATE          {1000, 1000, 100, 100}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {3500,3500,400,1000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_MAX_FEEDRATE          {1000, 1000, 100, 150}    // (mm/sec)
+#define DEFAULT_MAX_ACCELERATION      {2600,2600,400,1000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
-#define DEFAULT_ACCELERATION          3500    // X, Y, Z and E acceleration in mm/s^2 for printing moves
+#define DEFAULT_ACCELERATION          2600    // X, Y, Z and E acceleration in mm/s^2 for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  1000    // E acceleration in mm/s^2 for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3500    // X, Y, Z acceleration in mm/s^2 for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration in mm/s^2 for travel (non printing) moves
 
 // The speed change that does not require acceleration (i.e. the software might assume it can be done instantaneously)
-#define DEFAULT_XYJERK                30.0    // (mm/sec)
-#define DEFAULT_ZJERK                 2.0     // (mm/sec)
-#define DEFAULT_EJERK                 1.0    // (mm/sec)
+#define DEFAULT_XYJERK                40.0    // (mm/sec)
+#define DEFAULT_ZJERK                 0.5     // (mm/sec)
+#define DEFAULT_EJERK                 100.0    // (mm/sec)
 
 
 //=============================================================================
