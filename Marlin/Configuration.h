@@ -313,13 +313,15 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
-  // GARCAD Autotuned from 240C; M303 E0 S230 C8
-  //#define  DEFAULT_Kp 9.65
-  //#define  DEFAULT_Ki 1.23
-  //#define  DEFAULT_Kd 18.97
+  // GARCAD 12v Autotuned from 240C; M303 E0 S230 C8
   #define  DEFAULT_Kp 19.56
   #define  DEFAULT_Ki 1.38
   #define  DEFAULT_Kd 69.29
+
+  // GARCAD 15v
+  #define  DEFAULT_Kp 17.90
+  #define  DEFAULT_Ki 2.99
+  #define  DEFAULT_Kd 26.76
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
@@ -386,7 +388,7 @@
 // or to allow moving the extruder regardless of the hotend temperature.
 // *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 170
+#define EXTRUDE_MINTEMP 130 // Wax filament temps
 
 // This option prevents a single extrusion longer than EXTRUDE_MAXLENGTH.
 // Note that for Bowden Extruders a too-small value here may prevent loading.
@@ -504,7 +506,7 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 2.3 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -522,9 +524,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          4000    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   4000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk (mm/s)
@@ -750,7 +752,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS 200
 #define Y_MAX_POS 200
-#define Z_MAX_POS 200
+#define Z_MAX_POS 250
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
 #define MIN_SOFTWARE_ENDSTOPS
